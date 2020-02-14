@@ -1,14 +1,12 @@
 const mongoose = require('../connection');
 
 const WorkoutSchema = new mongoose.Schema({
-  date: String,
-  exercise: [
+  _id: Number,
+  date: Date,
+  exerciseList: [
     {
-      id: Number,
-      exercise: String,
-      sets: Number,
-      reps: Number,
-      weight: Number
+      ref: 'Exercise',
+      type: mongoose.Schema.Types.ObjectId
     }
   ]
 });
