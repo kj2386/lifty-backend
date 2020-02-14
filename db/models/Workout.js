@@ -1,7 +1,6 @@
 const mongoose = require('../connection');
 
 const WorkoutSchema = new mongoose.Schema({
-  _id: Number,
   date: Date,
   exerciseList: [
     {

@@ -1,7 +1,6 @@
 const mongoose = require('../connection');
 
 const ExerciseSchema = new mongoose.Schema({
-  _id: Number,
   name: String,
   sets: [
     {
