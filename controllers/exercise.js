@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  Exercise.find({ _id: req.params.id }).then(exercise => {
+  Exercise.findById(req.params.id).then(exercise => {
     res.json(exercise);
   });
 });
