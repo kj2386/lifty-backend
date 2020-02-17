@@ -10,7 +10,11 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  Workout.findById(req.params.id).then(workout => res.json(workout));
+  Workout.findById(req.params.id).then(workout => {
+    Exercise.find(req.params.exId).then(exercises => {
+      res.json(exercises);
+    });
+  });
 });
 
 router.post('/', (req, res) => {
