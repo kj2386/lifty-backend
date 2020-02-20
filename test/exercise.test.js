@@ -98,6 +98,33 @@ describe('DELETE /exercise/:id', () => {
   });
 });
 
+describe('DELETE /exercise/:id/:setId', () => {
+  let exId = '5e4eba286fe7384f18d47174';
+  let setIdToDelete = '5e4eba286fe7384f18d47176';
+
+  before(done => {
+    api
+      .delete(`/exercise/${exId}/${setIdToDelete}`)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        done();
+      });
+  });
+
+  it('should remove a set by id', done => {
+    api
+      .get(`/exercise/${exId}`)
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        const deletedSet = response.body.find(
+          sets => sets.id === setIdToDelete
+        );
+        expect(deletedSet).to.equal(undefined);
+        done();
+      });
+  });
+});
+
 describe('PUT /exercise/:id', () => {
   let exerciseToUpdate = {
     _id: '5e47113c1133bb54f4ba8ed9',
@@ -122,4 +149,3 @@ describe('PUT /exercise/:id', () => {
     done();
   });
 });
-

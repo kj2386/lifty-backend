@@ -58,6 +58,14 @@ router.put('/:id/edit', (req, res) => {
   }).then(workout => res.json(workout));
 });
 
+router.delete('/:id/:exerciseId/:setId', (req, res) => {
+  let workoutId = req.params.id;
+  let exerciseId = req.params.exerciseId;
+  let setId = req.params.setId;
+
+  
+})
+
 router.delete('/:id', (req, res) => {
   Workout.findOneAndRemove({ _id: req.params.id }).then(workout =>
     res.json(workout)

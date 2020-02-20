@@ -22,6 +22,19 @@ router.put('/:id', (req, res) => {
   }).then(exercise => res.json(exercise));
 });
 
+router.delete('/:id/:setId', (req, res) => {
+  Exercise.findOneAndUpdate(
+    { _id: req.params.id },
+    {
+      $pull: {
+        sets: { _id: req.params.setId }
+      }
+    }
+  ).then(set => {
+    res.json(set);
+  });
+});
+
 router.delete('/:id', (req, res) => {
   Exercise.findOneAndRemove({ _id: req.params.id }).then(exercise => {
     res.json(exercise);
