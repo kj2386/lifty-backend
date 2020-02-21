@@ -10,25 +10,25 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+  let workoutDoc;
+
   Workout.findById(req.params.id).then(workout => {
-    Exercise.find(req.params.exId).then(exercises => {
-      res.json(exercises);
+    workoutDoc = workout;
+    Exercise.find({ workout: req.params.id }).then(exercises => {
+      const response = {
+        _id: workoutDoc._id,
+        date: workoutDoc._date,
+        exerciseList: exercises
+      };
+
+      res.json(response);
     });
   });
 });
 
-router.post('/:id', (req, res) => {
-  Workout.findById(req.params.id).then(workout1 => {
-    Exercise.create({
-      name: req.body.name,
-      sets: req.body.sets,
-      workout: workout1.id
-    }).then(exer1 => {
-      workout1.exerciseList.push(exer1);
-      workout1.save();
-
-      res.json(workout1);
-    });
+router.post('/', (req, res) => {
+  Workout.create({ date: req.body.date, exerciseList: [] }).then(workout => {
+    res.json(workout);
   });
 });
 
