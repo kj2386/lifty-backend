@@ -1,4 +1,4 @@
-# lifty-backend
+### lifty-backend
 
 ## Description
 
@@ -22,9 +22,42 @@ As someone who exercises using the "progressive overload" methodology, I need to
 
 Mongo, Mongoose, Express, JS. Testing done with Mocha, Chai, Supertest.
 
-## Installation Instructions / Getting Started
+## Endpoints
 
-http://lifty-backend.herokuapp.com/
+http://lifty-backend.herokuapp.com/workout
 
-Endpoints:
+# GET /
+Gets all workouts
+
+# GET /:id
+Gets an individual workout 
+
+# POST / 
+Creates a new workout
+
+# DELETE /:id
+
+Delete a workout
+
+
+http://lifty-backend.herokuapp.com/exercise
+
+# GET / 
+Gets all exercises in a workout
+
+# GET /:id
+Gets an exercise by id
+
+# POST /
+Create an exercise
+
+# PUT /:id 
+Edit and exercise
+
+# DELETE /:id/:setId
+Delete a set
+
+# DELETE /:id
+Delete an exercise
+
 
