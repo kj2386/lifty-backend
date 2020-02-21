@@ -1,4 +1,4 @@
-### lifty-backend
+# lifty-backend
 
 ## Description
 
@@ -26,38 +26,38 @@ Mongo, Mongoose, Express, JS. Testing done with Mocha, Chai, Supertest.
 
 http://lifty-backend.herokuapp.com/workout
 
-# GET /
+### GET /
 Gets all workouts
 
-# GET /:id
+### GET /:id
 Gets an individual workout 
 
-# POST / 
+### POST / 
 Creates a new workout
 
-# DELETE /:id
+### DELETE /:id
 
 Delete a workout
 
 
 http://lifty-backend.herokuapp.com/exercise
 
-# GET / 
+### GET / 
 Gets all exercises in a workout
 
-# GET /:id
+### GET /:id
 Gets an exercise by id
 
-# POST /
+### POST /
 Create an exercise
 
-# PUT /:id 
+### PUT /:id 
 Edit and exercise
 
-# DELETE /:id/:setId
+### DELETE /:id/:setId
 Delete a set
 
-# DELETE /:id
+### DELETE /:id
 Delete an exercise
 
 
