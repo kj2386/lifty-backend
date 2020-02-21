@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Exercise = require('../db/models/Exercise');
+const Workout = require('../db/models/Workout');
 
 router.get('/', (req, res) => {
   Exercise.find({}).then(exercises => res.json(exercises));
@@ -12,11 +13,9 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.post('/', (req, res) => {
-  Exercise.create(req.body).then(exercise => res.json(exercise));
-});
 
-router.put('/:id', (req, res) => {
+
+router.put('/:id/edit', (req, res) => {
   Exercise.findOneAndUpdate({ _id: req.params.id }, req.body, {
     new: true
   }).then(exercise => res.json(exercise));

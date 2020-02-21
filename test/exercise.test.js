@@ -26,77 +26,43 @@ describe('GET /exercise/:id', () => {
   });
 });
 
-describe('POST /exercise', () => {
-  const newExercise = {
-    name: 'Squats',
-    sets: [
-      {
-        setNumber: 1,
-        reps: 8,
-        weight: 350
-      }
-    ],
-    workout: ['5e47113c1133bb54f4ba8ed9']
-  };
 
-  before(done => {
-    api
-      .post('/exercise')
-      .set('Accept', 'application/json')
-      .send(newExercise)
-      .end(done);
-  });
+// describe('DELETE /exercise/:id', () => {
+//   let idToDelete;
 
-  it('should add a new exercise to the workout', done => {
-    api
-      .get('/exercise')
-      .set('Accept', 'application/json')
-      .end((error, response) => {
-        const exerciseToFind = response.body.find(
-          exercise => exercise.id === newExercise.id
-        );
-        expect(exerciseToFind).to.be.an('object');
-        done();
-      });
-  });
-});
+//   before(done => {
+//     api
+//       .get('/exercise')
+//       .set('Accept', 'application/json')
+//       .end((error, response) => {
+//         const exercises = response.body;
+//         idToDelete = exercises[exercises.length - 1]._id;
+//         done();
+//       });
+//   });
 
-describe('DELETE /exercise/:id', () => {
-  let idToDelete;
+//   before(done => {
+//     api
+//       .delete(`/exercise/${idToDelete}`)
+//       .set('Accept', 'application/json')
+//       .end((error, response) => {
+//         done();
+//       });
+//   });
 
-  before(done => {
-    api
-      .get('/exercise')
-      .set('Accept', 'application/json')
-      .end((error, response) => {
-        const exercises = response.body;
-        idToDelete = exercises[exercises.length - 1]._id;
-        done();
-      });
-  });
-
-  before(done => {
-    api
-      .delete(`/exercise/${idToDelete}`)
-      .set('Accept', 'application/json')
-      .end((error, response) => {
-        done();
-      });
-  });
-
-  it('should remove an exercise by id', done => {
-    api
-      .get('/exercise')
-      .set('Accept', 'application/json')
-      .end((error, response) => {
-        const deletedExercise = response.body.find(
-          exercise => exercise.id === idToDelete
-        );
-        expect(deletedExercise).to.equal(undefined);
-        done();
-      });
-  });
-});
+//   it('should remove an exercise by id', done => {
+//     api
+//       .get('/exercise')
+//       .set('Accept', 'application/json')
+//       .end((error, response) => {
+//         const deletedExercise = response.body.find(
+//           exercise => exercise.id === idToDelete
+//         );
+//         expect(deletedExercise).to.equal(undefined);
+//         done();
+//       });
+//   });
+// });
 
 describe('DELETE /exercise/:id/:setId', () => {
   let exId = '5e4eba286fe7384f18d47174';
@@ -149,3 +115,5 @@ describe('PUT /exercise/:id', () => {
     done();
   });
 });
+
+

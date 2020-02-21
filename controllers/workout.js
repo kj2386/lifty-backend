@@ -17,20 +17,17 @@ router.get('/:id', (req, res) => {
   });
 });
 
-router.post('/', (req, res) => {
-  Workout.create(req.body).then(workout => res.json(workout));
-});
+router.post('/:id', (req, res) => {
+  Workout.findById(req.params.id).then(workout1 => {
+    Exercise.create({
+      name: req.body.name,
+      sets: req.body.sets,
+      workout: workout1.id
+    }).then(exer1 => {
+      workout1.exerciseList.push(exer1);
+      workout1.save();
 
-router.post('/new', (req, res) => {
-  Workout.create(req.body.workout).then(newWorkout => {
-    Exercise.create(req.body.exercise).then(newExercise => {
-      newWorkout.exerciseList.push(newExercise._id);
-      newExercise.workout.push(newWorkout._id);
-
-      newWorkout.save();
-      newExercise.save();
-
-      res.json(newWorkout);
+      res.json(workout1);
     });
   });
 });
@@ -57,14 +54,6 @@ router.put('/:id/edit', (req, res) => {
     new: true
   }).then(workout => res.json(workout));
 });
-
-router.delete('/:id/:exerciseId/:setId', (req, res) => {
-  let workoutId = req.params.id;
-  let exerciseId = req.params.exerciseId;
-  let setId = req.params.setId;
-
-  
-})
 
 router.delete('/:id', (req, res) => {
   Workout.findOneAndRemove({ _id: req.params.id }).then(workout =>

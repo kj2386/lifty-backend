@@ -26,6 +26,42 @@ describe('GET /workout/:id', () => {
   });
 });
 
+describe('POST /workout/:id', () => {
+  const newExercise = {
+    name: 'Squats',
+    sets: [
+      {
+        setNumber: 1,
+        reps: 8,
+        weight: 350
+      }
+    ],
+    workout: ['']
+  };
+
+  before(done => {
+    api
+      .post('/workout/5e4f3cd713dfc06ef8d22d09')
+      .set('Accept', 'application/json')
+      .send(newExercise)
+      .end(done);
+  });
+
+  it('should add a new exercise to the workout', done => {
+    api
+      .get('/workout')
+      .set('Accept', 'application/json')
+      .end((error, response) => {
+        const exerciseToFind = response.body.find(
+          exercise => exercise.id === newExercise.id
+        );
+        expect(exerciseToFind).to.be.an('object');
+        done();
+      });
+  });
+});
+
+
 describe('POST /workout', () => {
   const newWorkout = {
     date: '2020-02-17',
@@ -54,45 +90,7 @@ describe('POST /workout', () => {
   });
 });
 
-// describe('POST /workout/new', () => {
-//   const newWorkout = {
-//     date: '2020-02-17',
-//     exerciseList: [
-//       {
-//         name: 'Squats',
-//         sets: [
-//           {
-//             setNumber: 1,
-//             reps: 8,
-//             weight: 350
-//           }
-//         ]
-//       }
-//     ]
-//   };
 
-//   before(done => {
-//     api
-//       .post('/workout/new')
-//       .set('Accept', 'application/json')
-//       .send(newWorkout)
-//       .end(done);
-//     done();
-//   });
-
-//   it('should add a new workout with a new exercise', done => {
-//     api
-//       .get('/workout')
-//       .set('Accept', 'application/json')
-//       .end((error, response) => {
-//         const workoutToFind = response.body.find(
-//           workout => workout.id === newWorkout.id
-//         );
-//         expect(workoutToFind).to.be.an('object');
-//         done();
-//       });
-//   });
-// });
 
 describe('DELETE /workout/:id', () => {
   let idToDelete;
